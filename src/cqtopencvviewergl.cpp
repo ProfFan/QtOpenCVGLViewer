@@ -139,7 +139,7 @@ void CQtOpenCVViewerGl::renderImage()
         {
             float vertices[] = {-1.0,-1.0,  1.0,-1.0,  1.0,1.0,  -1.0,1.0};
 
-            float coordTexture[] = {0.0,0.0,  1.0,0.0,  1.0,1.0,  0.0,1.0};
+            float coordTexture[] = {0.0,1.0,  1.0,1.0,  1.0,0.0,  0.0,0.0};
 
             GLint vertexLocation = glGetAttribLocation( program->programId(), "in_Vertex" );
             GLint texcoordLocation = glGetAttribLocation( program->programId(), "textureCoordinate" );

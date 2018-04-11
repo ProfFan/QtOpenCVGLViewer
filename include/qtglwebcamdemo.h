@@ -10,14 +10,19 @@
 #include <QFuture>
 #include <QtConcurrent>
 #include <QFutureWatcher>
+#include <AKAZE.h>
+
 namespace Ui {
     class QtGLWebcamDemo;
 }
 
 class ImageReader : public QObject {
 public:
+    ImageReader(AKAZEOptions opt);
     QFuture<cv::Mat> read(const bool mFlipVert, const bool mFlipHoriz);
     cv::VideoCapture mCapture;
+public:
+    libAKAZECU::AKAZE det;
 };
 
 class QtGLWebcamDemo : public QMainWindow
@@ -40,7 +45,7 @@ private slots:
 private:
     Ui::QtGLWebcamDemo *ui;
 
-    ImageReader reader;
+    std::unique_ptr<ImageReader> reader;
 
     int frameCount = 0;
     QFuture<cv::Mat> future;

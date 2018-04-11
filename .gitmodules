@@ -1,0 +1,3 @@
+[submodule "vendor/akaze"]
+	path = vendor/akaze
+	url = https://github.com/nbergst/akaze.git

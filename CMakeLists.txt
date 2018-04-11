@@ -18,11 +18,12 @@ find_package(catkin REQUIRED COMPONENTS
 set(GLUT_ROOT_PATH /usr/local/Cellar/freeglut/3.0.0)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-find_package(OpenCV 3 REQUIRED COMPONENTS highgui core imgproc features2d)
+find_package(OpenCV 3 REQUIRED COMPONENTS highgui core imgproc features2d calib3d)
 find_package(GLUT REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets OpenGL Gui Concurrent)
+find_package(CUDA REQUIRED)
 # set variable names already used with Qt4
 set(QT_LIBRARIES Qt5::Widgets)
 set(QTVERSION ${Qt5Widgets_VERSION})
@@ -133,7 +134,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
   include
-  ${catkin_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS} ${CUDA_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -162,7 +163,7 @@ add_executable(${PROJECT_NAME}_node src/main.cpp src/cqtopencvviewergl.cpp src/q
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_node Qt5::Gui Qt5::Core Qt5::Widgets Qt5::Concurrent ${catkin_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} ${OpenCV_LIBS} ${GLUT_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}_node /usr/local/lib/libAKAZE.a /usr/local/lib/libAKAZE_CUDA.a Qt5::Gui Qt5::Core Qt5::Widgets Qt5::Concurrent ${catkin_LIBRARIES} ${CUDA_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} ${OpenCV_LIBS} ${GLUT_LIBRARIES})
 
 #############
 ## Install ##
